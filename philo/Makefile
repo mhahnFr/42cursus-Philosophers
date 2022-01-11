@@ -2,10 +2,10 @@
 NAME = philo
 
 # The source files.
-SRC = 
+SRC = ./main.c
 
 # The object files.
-OBJ = $(patsubst %.o,%.c,$(SRC))
+OBJ = $(patsubst %.c,%.o,$(SRC))
 
 # The flags to compile with.
 CFLAGS = -Wall -Werror -Wextra -g #-Ofast
