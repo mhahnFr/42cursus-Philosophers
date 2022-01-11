@@ -13,6 +13,7 @@ struct s_delegate {
 	size_t			time_to_sleep;
 	size_t			time_to_eat;
 	size_t			time_to_die;
+	int				meal_count;
 	size_t			philo_count;
 	struct s_philo	philosophers[];
 };

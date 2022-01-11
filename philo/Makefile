@@ -2,7 +2,7 @@
 NAME = philo
 
 # The source files.
-SRC = ./main.c ./philo.c ./delegate.c
+SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c
 
 # The object files.
 OBJ = $(patsubst %.c,%.o,$(SRC))

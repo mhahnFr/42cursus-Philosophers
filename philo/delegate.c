@@ -22,6 +22,7 @@ void	delegate_create(struct s_delegate *this, size_t philo_count)
 	this->time_to_sleep = 0;
 	this->time_to_eat = 0;
 	this->time_to_die = 0;
+	this->meal_count = -1;
 	this->philo_count = philo_count;
 	i = 0;
 	while (i < philo_count)

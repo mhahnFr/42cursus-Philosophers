@@ -16,6 +16,7 @@ void	philo_create(struct s_philo *this)
 {
 	if (this == NULL)
 		return ;
+	this->state = UNDEFINED;
 }
 
 void	philo_destroy(struct s_philo *this)
