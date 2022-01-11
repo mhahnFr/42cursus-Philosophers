@@ -2,7 +2,7 @@
 NAME = philo
 
 # The source files.
-SRC = ./main.c
+SRC = ./main.c ./philo.c
 
 # The object files.
 OBJ = $(patsubst %.c,%.o,$(SRC))
@@ -11,7 +11,7 @@ OBJ = $(patsubst %.c,%.o,$(SRC))
 CFLAGS = -Wall -Werror -Wextra -g #-Ofast
 
 # The flags to link with.
-LDFLAGS = 
+LDFLAGS = -I.
 
 
 # Makes whatever is needed.
