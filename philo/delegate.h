@@ -1,7 +1,7 @@
 #ifndef DELEGATE_H
 # define DELEGATE_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 # include "philo.h"
 
