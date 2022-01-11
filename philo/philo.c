@@ -2,7 +2,7 @@
 
 #include "philo.h"
 
-struct s_philo	*philo_new()
+struct s_philo	*philo_new(void)
 {
 	struct s_philo	*this;
 

@@ -3,6 +3,8 @@
 
 # include <stdbool.h>
 
+# include "state.h"
+
 /*
  * Represents a philosopher. Contains the index of that specific philosopher,
  * its state and an indicator wether he has died.
@@ -17,7 +19,7 @@ struct s_philo {
  * Allocates a new philosopher object. Returns either the newly allocated
  * object or null if the allocation failed.
  */
-struct s_philo	*philo_new();
+struct s_philo	*philo_new(void);
 
 /*
  * Initializes the given philosopher object. Does nothing if no object is
