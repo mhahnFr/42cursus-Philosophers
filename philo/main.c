@@ -22,7 +22,7 @@ int	main(const int argc, const char **argv)
 	if (!cli(argv, argc))
 	{
 		printf("Usage: philo no_of_philos time_to_die time_to_eat"
-			"time_to_sleep [meal count]\n");
+			"time_to_sleep [meal_count]\n");
 		return (1);
 	}
 	return (0);
