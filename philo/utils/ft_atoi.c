@@ -46,10 +46,10 @@ bool	ft_atoi_base(
 	}
 	while (string[in] != '\0')
 	{
-		ret = true;
 		pos = ft_strchr(base, string[in]);
 		if (pos == NULL)
 			break ;
+		ret = true;
 		*i = (*i * base_length) + (pos - base);
 		in++;
 	}
