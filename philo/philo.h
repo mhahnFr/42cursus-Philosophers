@@ -2,6 +2,7 @@
 # define PHILO_H
 
 # include <stdbool.h>
+# include <pthread.h>
 
 # include "state.h"
 
