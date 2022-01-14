@@ -10,11 +10,12 @@
  * themselves as well as their count and the timeout values.
  */
 struct s_delegate {
-	size_t			time_to_sleep;
-	size_t			time_to_eat;
-	size_t			time_to_die;
-	int				meal_count;
-	size_t			philo_count;
+	long			time_to_sleep;
+	long			time_to_eat;
+	long			time_to_die;
+	long			philo_count;
+	long			meal_count;
+	bool			meal_count_set;
 	struct s_philo	philosophers[];
 };
 
@@ -31,6 +32,13 @@ struct s_delegate	*delegate_new(size_t philo_count);
 void				delegate_create(
 						struct s_delegate *this,
 						size_t philo_count);
+
+/*
+ * Validates the values of the given delegate object. Returns true if all
+ * values found in the given delegate object are valid, false otherwise.
+ * Returns false if no delegate object is given.
+ */
+bool				delegate_validate(struct s_delegate *this);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.

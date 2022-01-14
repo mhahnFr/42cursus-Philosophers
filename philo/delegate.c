@@ -34,7 +34,7 @@ void	delegate_create(struct s_delegate *this, size_t philo_count)
 
 void	delegate_destroy(struct s_delegate *this)
 {
-	size_t	i;
+	long	i;
 
 	if (this == NULL)
 		return ;
