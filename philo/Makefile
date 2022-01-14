@@ -3,7 +3,7 @@ NAME = philo
 
 # The source files.
 SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c ./utils/ft_strings.c  \
-	  ./delegate_validation.c ./fork.c
+	  ./delegate_validation.c ./fork.c ./philo_run.c
 
 # The header files.
 HDR = ./philo.h ./state.h ./delegate.h ./fork.h
@@ -27,6 +27,10 @@ all: $(NAME)
 # Makes whatever is needed for the executable.
 $(NAME): $(OBJ) $(H_O)
 	$(CC) $(LDFLAGS) -o $(NAME) $(OBJ)
+
+# Runs an example simulation.
+run: $(NAME)
+	./$(NAME) 10 100 100 100 100
 
 # Runs the norm checker on each registered source file.
 nor:

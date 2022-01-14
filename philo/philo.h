@@ -32,6 +32,11 @@ struct s_philo	*philo_new(size_t index);
 void			philo_create(struct s_philo *this, size_t index);
 
 /*
+ * Starts simulating the given philosopher.
+ */
+void			philo_run(struct s_philo *this);
+
+/*
  * Destroys the given philosopher object. Does nothing if no object is given.
  */
 void			philo_destroy(struct s_philo *this);
