@@ -18,6 +18,7 @@ void	philo_create(struct s_philo *this, size_t index)
 		return ;
 	this->index = index;
 	this->state = UNDEFINED;
+	fork_create(&this->fork);
 }
 
 void	philo_destroy(struct s_philo *this)

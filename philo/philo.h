@@ -5,6 +5,7 @@
 # include <pthread.h>
 
 # include "state.h"
+# include "fork.h"
 
 /*
  * Represents a philosopher. Contains the index of that specific philosopher,
@@ -12,8 +13,9 @@
  */
 struct s_philo {
 	size_t			index;
-	bool			has_died;
 	pthread_t		thread;
+	struct s_fork	fork;
+	bool			has_died;
 	enum e_state	state;
 };
 

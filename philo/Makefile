@@ -3,10 +3,10 @@ NAME = philo
 
 # The source files.
 SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c ./utils/ft_strings.c  \
-	  ./delegate_validation.c
+	  ./delegate_validation.c ./fork.c
 
 # The header files.
-HDR = ./philo.h ./state.h ./delegate.h
+HDR = ./philo.h ./state.h ./delegate.h ./fork.h
 
 # The header object files.
 H_O = $(patsubst %.h,%.gch,$(HDR))
