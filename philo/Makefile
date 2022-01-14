@@ -30,11 +30,11 @@ $(NAME): $(OBJ) $(H_O)
 
 # Runs an example simulation.
 run: $(NAME)
-	./$(NAME) 10 100 100 100 100
+	./$(NAME) 10 100 100 100
 
 # Runs the norm checker on each registered source file.
 nor:
-	norminette $(SRC) $(patsubst %.c,%.h,$(SRC)) | grep :
+	norminette $(SRC) $(HDR) | grep :
 
 %.gch: %.h
 	$(CC) $(CFLAGS) -c -o $@ $<

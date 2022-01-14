@@ -12,9 +12,9 @@ static bool	delegate_validate_meal_count(struct s_delegate *this)
 bool	delegate_validate(struct s_delegate *this)
 {
 	return (this != NULL
-			&& this->time_to_sleep >= 0
-			&& this->time_to_eat >= 0
-			&& this->time_to_die >= 0
-			&& this->philo_count >= 1
-			&& delegate_validate_meal_count(this));
+		&& this->time_to_sleep >= 0
+		&& this->time_to_eat >= 0
+		&& this->time_to_die >= 0
+		&& this->philo_count >= 1
+		&& delegate_validate_meal_count(this));
 }
