@@ -18,3 +18,15 @@ bool	delegate_validate(struct s_delegate *this)
 		&& this->philo_count >= 1
 		&& delegate_validate_meal_count(this));
 }
+
+void	delegate_invalidate(struct s_delegate *this)
+{
+	if (this == NULL)
+		return ;
+	this->time_to_die = -1;
+	this->time_to_sleep = -1;
+	this->time_to_eat = -1;
+	this->philo_count = -1;
+	this->meal_count = -1;
+	this->meal_count_set = true;
+}

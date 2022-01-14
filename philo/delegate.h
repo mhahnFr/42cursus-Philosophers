@@ -10,11 +10,11 @@
  * themselves as well as their count and the timeout values.
  */
 struct s_delegate {
-	long			time_to_sleep;
-	long			time_to_eat;
-	long			time_to_die;
-	long			philo_count;
-	long			meal_count;
+	int				time_to_sleep;
+	int				time_to_eat;
+	int				time_to_die;
+	int				philo_count;
+	int				meal_count;
 	bool			meal_count_set;
 	struct s_philo	philosophers[];
 };
@@ -39,6 +39,13 @@ void				delegate_create(
  * Returns false if no delegate object is given.
  */
 bool				delegate_validate(struct s_delegate *this);
+
+/*
+ * Invalidates the values of the given delegate object. A call to the method
+ * "delegate_validate(struct s_delegate)" will return false after this method
+ * has been invoked. Does nothing if no delegate object is given.
+ */
+void				delegate_invalidate(struct s_delegate *this);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.

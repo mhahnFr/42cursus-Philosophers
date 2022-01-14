@@ -14,13 +14,15 @@ static struct s_delegate	*cli(const char **argv, const int argc)
 	delegate = delegate_new(ft_atoi(argv[1]));
 	if (delegate == NULL)
 		return (NULL);
-	delegate->time_to_die = ft_atoi(argv[2]);
-	delegate->time_to_eat = ft_atoi(argv[3]);
-	delegate->time_to_sleep = ft_atoi(argv[4]);
+	if (!ft_atoi_error(argv[2], &delegate->time_to_die)
+		|| !ft_atoi_error(argv[3], &delegate->time_to_eat)
+		|| !ft_atoi_error(argv[4], &delegate->time_to_sleep))
+		delegate_invalidate(delegate);
 	delegate->meal_count_set = false;
 	if (argc > 5)
 	{
-		delegate->meal_count = ft_atoi(argv[5]);
+		if (!ft_atoi_error(argv[5], &delegate->meal_count))
+			delegate_invalidate(delegate);
 		delegate->meal_count_set = true;
 	}
 	return (delegate);
