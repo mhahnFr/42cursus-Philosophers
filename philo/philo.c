@@ -26,6 +26,7 @@ void	philo_destroy(struct s_philo *this)
 	if (this == NULL)
 		return ;
 	this->state = UNDEFINED;
+	fork_destroy(&this->fork);
 }
 
 void	philo_delete(struct s_philo *this)
