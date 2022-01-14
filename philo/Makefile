@@ -6,7 +6,7 @@ SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c ./utils/ft_strings.c  \
 	  ./delegate_validation.c ./fork.c ./philo_run.c
 
 # The header files.
-HDR = ./philo.h ./state.h ./delegate.h ./fork.h
+HDR = ./philo.h ./state.h ./delegate.h ./fork.h ./utils/utils.h
 
 # The header object files.
 H_O = $(patsubst %.h,%.gch,$(HDR))
@@ -45,7 +45,7 @@ nor:
 
 # Removes all temporary files.
 clean:
-	- $(RM) $(OBJ)
+	- $(RM) $(OBJ) $(H_O)
 	- $(RM) *~
 	- find . -name \*~ -print -delete
 

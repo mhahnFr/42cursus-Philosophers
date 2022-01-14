@@ -31,6 +31,7 @@ int	main(const int argc, const char **argv)
 	struct s_delegate	*delegate;
 
 	delegate = cli(argv, argc);
+	printf("%ld %ld %ld %ld %ld\n", delegate->philo_count, delegate->time_to_die, delegate->time_to_eat, delegate->time_to_sleep, delegate->meal_count);
 	if (delegate == NULL || !delegate_validate(delegate))
 	{
 		printf("Usage: philo no_of_philos time_to_die time_to_eat "

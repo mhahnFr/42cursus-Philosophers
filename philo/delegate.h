@@ -24,14 +24,14 @@ struct s_delegate {
  * philosophers. Rerturns either the newly allocated object or null if the
  * allocation failed.
  */
-struct s_delegate	*delegate_new(size_t philo_count);
+struct s_delegate	*delegate_new(long philo_count);
 
 /*
  * Initializes the given delegate object. Does nothing if no object is given.
  */
 void				delegate_create(
 						struct s_delegate *this,
-						size_t philo_count);
+						long philo_count);
 
 /*
  * Validates the values of the given delegate object. Returns true if all

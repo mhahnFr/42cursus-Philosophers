@@ -2,7 +2,7 @@
 
 #include "delegate.h"
 
-struct s_delegate	*delegate_new(size_t philo_count)
+struct s_delegate	*delegate_new(long philo_count)
 {
 	struct s_delegate	*this;
 
@@ -13,9 +13,9 @@ struct s_delegate	*delegate_new(size_t philo_count)
 	return (this);
 }
 
-void	delegate_create(struct s_delegate *this, size_t philo_count)
+void	delegate_create(struct s_delegate *this, long philo_count)
 {
-	size_t	i;
+	long	i;
 
 	if (this == NULL)
 		return ;
