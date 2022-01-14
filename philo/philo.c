@@ -2,20 +2,21 @@
 
 #include "philo.h"
 
-struct s_philo	*philo_new(void)
+struct s_philo	*philo_new(size_t index)
 {
 	struct s_philo	*this;
 
 	this = malloc(sizeof(struct s_philo));
 	if (this != NULL)
-		philo_create(this);
+		philo_create(this, index);
 	return (this);
 }
 
-void	philo_create(struct s_philo *this)
+void	philo_create(struct s_philo *this, size_t index)
 {
 	if (this == NULL)
 		return ;
+	this->index = index;
 	this->state = UNDEFINED;
 }
 

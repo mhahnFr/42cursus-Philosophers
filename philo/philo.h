@@ -12,6 +12,7 @@
 struct s_philo {
 	size_t			index;
 	bool			has_died;
+	pthread_t		thread;
 	enum e_state	state;
 };
 
@@ -19,13 +20,13 @@ struct s_philo {
  * Allocates a new philosopher object. Returns either the newly allocated
  * object or null if the allocation failed.
  */
-struct s_philo	*philo_new(void);
+struct s_philo	*philo_new(size_t index);
 
 /*
  * Initializes the given philosopher object. Does nothing if no object is
  * given.
  */
-void			philo_create(struct s_philo *this);
+void			philo_create(struct s_philo *this, size_t index);
 
 /*
  * Destroys the given philosopher object. Does nothing if no object is given.
