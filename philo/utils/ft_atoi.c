@@ -23,6 +23,13 @@ bool	ft_atoi_error(const char *string, int *i)
 	return (ft_atoi_base(string, i, "0123456789", 10));
 }
 
+static size_t	ft_whitespace_skipper(const char *string, size_t start)
+{
+	while (ft_is_whitespace(string[start]) && string[start] != '\0')
+		start++;
+	return (start);
+}
+
 bool	ft_atoi_base(
 			const char *string,
 			int *i,
@@ -36,8 +43,7 @@ bool	ft_atoi_base(
 
 	ft_assign_trick(&sign, &pos, &ret, &in);
 	*i = 0;
-	while (ft_is_whitespace(string[in]) && string[in] != '\0')
-		in++;
+	in = ft_whitespace_skipper(string, in);
 	if (string[in] == '-' || string[in] == '+')
 	{
 		if (string[in] == '-')
