@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "delegate.h"
 #include "philo.h"
 
@@ -6,10 +8,10 @@ enum e_state	philo_do_or_die(
 		struct s_delegate *delegate,
 		enum e_state action)
 {
-	(void) this;
 	(void) delegate;
 	(void) action;
-	return (UNDEFINED);
+	(void) this;
+	return (DIED);
 }
 
 void	philo_run(struct s_philo *this, struct s_delegate *delegate)

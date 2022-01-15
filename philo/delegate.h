@@ -20,6 +20,14 @@ struct s_delegate {
 };
 
 /*
+ * A helper struct to pass all needed variables into the thread.
+ */
+struct s_thread_helper {
+	struct s_delegate	*delegate;
+	struct s_philo		*philo;
+};
+
+/*
  * Allocates and returns a new delegate object with the indicated number of
  * philosophers. Rerturns either the newly allocated object or null if the
  * allocation failed.
