@@ -2,22 +2,23 @@
 
 #include "philo.h"
 
-struct s_philo	*philo_new(size_t index)
+struct s_philo	*philo_new(size_t index, struct s_delegate *delegate)
 {
 	struct s_philo	*this;
 
 	this = malloc(sizeof(struct s_philo));
 	if (this != NULL)
-		philo_create(this, index);
+		philo_create(this, index, delegate);
 	return (this);
 }
 
-void	philo_create(struct s_philo *this, size_t index)
+void	philo_create(struct s_philo *this, size_t index, struct s_delegate *delegate)
 {
 	if (this == NULL)
 		return ;
 	this->index = index;
 	this->state = UNDEFINED;
+	this->delegate = delegate;
 	fork_create(&this->fork);
 }
 

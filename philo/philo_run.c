@@ -5,29 +5,27 @@
 
 enum e_state	philo_do_or_die(
 		struct s_philo *this,
-		struct s_delegate *delegate,
 		enum e_state action)
 {
-	(void) delegate;
 	(void) action;
-	(void) this;
+	printf("Thread: %zu\n", this->index);
 	return (DIED);
 }
 
-void	philo_run(struct s_philo *this, struct s_delegate *delegate)
+void	philo_run(struct s_philo *this)
 {
 	while (!this->has_died)
 	{
 		if (this->state == EATING)
-			this->state = philo_do_or_die(this, delegate, EATING);
+			this->state = philo_do_or_die(this, EATING);
 		else if (this->state == SLEEPING)
-			this->state = philo_do_or_die(this, delegate, SLEEPING);
+			this->state = philo_do_or_die(this, SLEEPING);
 		else if (this->state == THINKING || this->state == UNDEFINED)
-			this->state = philo_do_or_die(this, delegate, THINKING);
+			this->state = philo_do_or_die(this, THINKING);
 		if (this->state == DIED)
 		{
 			this->has_died = true;
-			delegate_stop_simulation(delegate, this);
+			delegate_stop_simulation(this->delegate, this);
 		}
 	}
 }

@@ -27,7 +27,7 @@ void	delegate_create(struct s_delegate *this, long philo_count)
 	i = 0;
 	while (i < philo_count)
 	{
-		philo_create(&this->philosophers[i], i);
+		philo_create(&this->philosophers[i], i, this);
 		i++;
 	}
 }

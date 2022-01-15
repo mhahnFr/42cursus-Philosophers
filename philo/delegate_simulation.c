@@ -2,30 +2,20 @@
 
 #include "delegate.h"
 
-static void	*delegate_thread_helper(void *arg)
-{
-	struct s_thread_helper	*helper;
-
-	helper = (struct s_thread_helper *) arg;
-	philo_run(helper->philo, helper->delegate);
-	return (NULL);
-}
-
+#include <stdio.h>
 void	delegate_start_simulation(struct s_delegate *this)
 {
-	int						i;
-	struct s_thread_helper	helper;
+	int	i;
 
 	i = 0;
 	while (i < this->philo_count)
 	{
-		helper.delegate = this;
-		helper.philo = (this->philosophers) + i; // FIXME Add proper argument passing
+		printf("Loop: %zu\n", this->philosophers[i].index);
 		pthread_create(
-			&helper.philo->thread,
+			&this->philosophers[i].thread,
 			NULL,
-			delegate_thread_helper,
-			&helper);
+			(t_thread_run) philo_run,
+			(void *) &this->philosophers[i]);
 		i++;
 	}
 }

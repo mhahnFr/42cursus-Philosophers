@@ -5,6 +5,8 @@
 
 # include "philo.h"
 
+typedef void *(*t_thread_run)(void *);
+
 /*
  * A structure with the parameters of the simulation. Contains the philosophers
  * themselves as well as their count and the timeout values.
@@ -17,14 +19,6 @@ struct s_delegate {
 	int				meal_count;
 	bool			meal_count_set;
 	struct s_philo	philosophers[];
-};
-
-/*
- * A helper struct to pass all needed variables into the thread.
- */
-struct s_thread_helper {
-	struct s_delegate	*delegate;
-	struct s_philo		*philo;
 };
 
 /*
