@@ -48,6 +48,18 @@ bool				delegate_validate(struct s_delegate *this);
 void				delegate_invalidate(struct s_delegate *this);
 
 /*
+ * Starts the philosophers simulation. For each philosopher, a thread is
+ * run.
+ */
+void				delegate_start_simulation(struct s_delegate *this);
+
+/*
+ * Stops the philosophers simulation. Stops all philosopher threads that are
+ * still running.
+ */
+void				delegate_stop_simulation(struct s_delegate *this);
+
+/*
  * Destroys the given delegate object. Does nothing if no object is given.
  */
 void				delegate_destroy(struct s_delegate *this);

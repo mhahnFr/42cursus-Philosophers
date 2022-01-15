@@ -5,6 +5,12 @@
 #include "delegate.h"
 #include "utils/utils.h"
 
+/*
+ * Parses the arguments given on the command line. Returns a newly allocated
+ * delegate object or null if either the allocation failed or the number of
+ * arguments is wrong. Returns an invalidated delegate object if the arguments
+ * themselves are wrong.
+ */
 static struct s_delegate	*cli(const char **argv, const int argc)
 {
 	struct s_delegate	*delegate;
@@ -40,6 +46,7 @@ int	main(const int argc, const char **argv)
 		delegate_delete(delegate);
 		return (1);
 	}
+	delegate_start_simulation(delegate);
 	delegate_delete(delegate);
 	return (0);
 }
