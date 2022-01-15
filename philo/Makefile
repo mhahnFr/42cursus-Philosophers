@@ -3,7 +3,7 @@ NAME = philo
 
 # The source files.
 SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c ./utils/ft_strings.c  \
-	  ./delegate_validation.c ./fork.c ./philo_run.c
+	  ./delegate_validation.c ./fork.c ./philo_run.c ./delegate_simulation.c
 
 # The header files.
 HDR = ./philo.h ./state.h ./delegate.h ./fork.h ./utils/utils.h

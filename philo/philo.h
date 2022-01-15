@@ -36,7 +36,7 @@ void			philo_create(struct s_philo *this, size_t index);
 /*
  * Starts simulating the given philosopher.
  */
-void			philo_run(struct s_philo *this);
+void			philo_run(struct s_philo *this, struct s_delegate *delegate);
 
 /*
  * Performs the indicated action on the given philosopher object. Returns the
