@@ -1,5 +1,8 @@
 #include "delegate.h"
 
+/*
+ * Returns wether the meal_count variables are set correctly.
+ */
 static bool	delegate_validate_meal_count(struct s_delegate *this)
 {
 	if (this == NULL)
