@@ -17,6 +17,7 @@ void	fork_create(struct s_fork *this)
 	if (this == NULL)
 		return ;
 	this->taken = false;
+	pthread_mutex_init(&this->mutex, NULL);
 }
 
 void	fork_destroy(struct s_fork *this)
@@ -24,6 +25,7 @@ void	fork_destroy(struct s_fork *this)
 	if (this == NULL)
 		return ;
 	this->taken = false;
+	pthread_mutex_destroy(&this->mutex);
 }
 
 void	fork_delete(struct s_fork *this)

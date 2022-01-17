@@ -24,6 +24,7 @@ void	delegate_create(struct s_delegate *this, long philo_count)
 	this->time_to_die = 0;
 	this->meal_count = -1;
 	this->philo_count = philo_count;
+	this->simulation_running = false;
 	i = 0;
 	while (i < philo_count)
 	{

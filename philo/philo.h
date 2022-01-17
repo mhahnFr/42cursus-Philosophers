@@ -3,6 +3,7 @@
 
 # include <stdbool.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 # include "state.h"
 # include "fork.h"
@@ -18,6 +19,7 @@ struct s_philo {
 	pthread_t			thread;
 	struct s_fork		fork;
 	struct s_delegate	*delegate;
+	struct timeval		last_eat_time;
 	bool				has_died;
 	enum e_state		state;
 };
@@ -50,6 +52,20 @@ void			philo_run(struct s_philo *this);
 enum e_state	philo_do_or_die(
 					struct s_philo *this,
 					enum e_state action);
+
+/*
+ * Simulates the given philosopher being in the state of sleep. Returns the new
+ * state afterwards. Blocks until either the given philosopher has died or it
+ * finished sleeping.
+ */
+enum e_state	philo_sleep_or_die(struct s_philo *this, int time);
+
+/*
+ * Simulates the given philosopher being in the state eating. Blocks until the
+ * philosopher died or has finished eating. Returns the new state of the
+ * philosopher.
+ */
+enum e_state	philo_eat(struct s_philo *this, int time);
 
 /*
  * Destroys the given philosopher object. Does nothing if no object is given.

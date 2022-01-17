@@ -1,33 +1,25 @@
 #include <pthread.h>
+#include <stdio.h>
 #include <unistd.h>
 
 #include "delegate.h"
 
 void	delegate_async_check(struct s_delegate *this)
 {
-	int	i;
-
-	i = 0;
-	while (i < this->philo_count)
-	{
-		if (this->philosophers[i].has_died)
-		{
-			delegate_stop_simulation(this, &this->philosophers[i]);
-			return ;
-		}
-		i++;
-	}
-	usleep(100);
-	delegate_async_check(this);
+	while (this->simulation_running)
+		usleep(100); // TODO Better checking time
+	delegate_stop_simulation(this);
 }
 
 void	delegate_start_simulation(struct s_delegate *this)
 {
 	int	i;
 
+	gettimeofday(&this->start_time, NULL);
 	i = 0;
 	while (i < this->philo_count)
 	{
+		this->philosophers[i].last_eat_time = this->start_time;
 		pthread_create(
 			&this->philosophers[i].thread,
 			NULL,
@@ -35,13 +27,17 @@ void	delegate_start_simulation(struct s_delegate *this)
 			(void *) &this->philosophers[i]);
 		i++;
 	}
+	this->simulation_running = true;
 	delegate_async_check(this);
 }
 
-void	delegate_stop_simulation(
-		struct s_delegate *this,
-		struct s_philo *reason)
+void	delegate_mark_simulation(struct s_delegate *this, bool running)
+{
+	this->simulation_running = running;
+}
+
+void	delegate_stop_simulation(struct s_delegate *this)
 {
 	(void) this;
-	(void) reason;
+	// TODO Stop all running threads
 }

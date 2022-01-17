@@ -2,9 +2,14 @@
 # define DELEGATE_H
 
 # include <stddef.h>
+# include <stdbool.h>
+# include <sys/time.h>
 
 # include "philo.h"
 
+/*
+ * A function that can be used to start a new thread.
+ */
 typedef void	*(*t_thread_run)(void *);
 
 /*
@@ -18,6 +23,8 @@ struct s_delegate {
 	int				philo_count;
 	int				meal_count;
 	bool			meal_count_set;
+	bool			simulation_running;
+	struct timeval	start_time;
 	struct s_philo	philosophers[];
 };
 
@@ -59,9 +66,27 @@ void				delegate_start_simulation(struct s_delegate *this);
  * Stops the philosophers simulation. Stops all philosopher threads that are
  * still running.
  */
-void				delegate_stop_simulation(
+void				delegate_stop_simulation(struct s_delegate *this);
+
+/*
+ * Marks the simulation with the given flag.
+ */
+void				delegate_mark_simulation(
 						struct s_delegate *this,
-						struct s_philo *reason);
+						bool running);
+
+/*
+ * Returns the number of milliseconds that have passed since the beginning of
+ * the simulation.
+ */
+int					delegate_get_time_stamp(struct s_delegate *this);
+
+/*
+ * Returns the difference between the two given time stamps in milliseconds.
+ */
+int					delegate_get_time_diff(
+						struct timeval *t1,
+						struct timeval *t2);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.

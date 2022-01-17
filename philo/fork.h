@@ -2,12 +2,14 @@
 # define FORK_H
 
 # include <stdbool.h>
+# include <pthread.h>
 
 /*
  * Represents a fork.
  */
 struct s_fork {
-	bool	taken;
+	pthread_mutex_t	mutex;
+	bool			taken;
 };
 
 /*

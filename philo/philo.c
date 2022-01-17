@@ -22,6 +22,8 @@ void	philo_create(
 	this->index = index;
 	this->state = UNDEFINED;
 	this->delegate = delegate;
+	this->has_died = false;
+	// TODO init eat time
 	fork_create(&this->fork);
 }
 
