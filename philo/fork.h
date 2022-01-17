@@ -5,7 +5,8 @@
 # include <pthread.h>
 
 /*
- * Represents a fork.
+ * Represents a fork. Includes a mutex to prevent being accessed by muliple
+ * threads.
  */
 struct s_fork {
 	pthread_mutex_t	mutex;
