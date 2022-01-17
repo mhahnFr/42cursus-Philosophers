@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "delegate.h"
+#include "delegate/delegate.h"
 #include "philo.h"
 
 enum e_state	philo_do_or_die(

@@ -5,7 +5,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 
-# include "philo.h"
+# include "philosopher/philo.h"
 
 /*
  * A function that can be used to start a new thread.

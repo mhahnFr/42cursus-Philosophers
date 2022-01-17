@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "delegate.h"
+#include "delegate/delegate.h"
 #include "utils/utils.h"
 
 /*

@@ -2,12 +2,15 @@
 NAME = philo
 
 # The source files.
-SRC = ./main.c ./philo.c ./delegate.c ./utils/ft_atoi.c ./utils/ft_strings.c  \
-	  ./delegate_validation.c ./fork.c ./philo_run.c ./delegate_simulation.c  \
-	  ./delegate_time.c ./philo_action.c
+SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c  \
+	  ./utils/ft_strings.c ./delegate/delegate_validation.c                   \
+	  ./philosopher/fork.c ./philosopher/philo_run.c                          \
+	  ./delegate/delegate_simulation.c ./delegate/delegate_time.c             \
+	  ./philosopher/philo_action.c
 
 # The header files.
-HDR = ./philo.h ./state.h ./delegate.h ./fork.h ./utils/utils.h
+HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h       \
+	  ./philosopher/fork.h ./utils/utils.h
 
 # The header object files.
 H_O = $(patsubst %.h,%.gch,$(HDR))
@@ -16,10 +19,10 @@ H_O = $(patsubst %.h,%.gch,$(HDR))
 OBJ = $(patsubst %.c,%.o,$(SRC))
 
 # The flags to compile with.
-CFLAGS = -Wall -Werror -Wextra -g #-Ofast
+CFLAGS = -Wall -Werror -Wextra -g -I. #-Ofast
 
 # The flags to link with.
-LDFLAGS = -I.
+LDFLAGS = 
 
 
 # Makes whatever is needed.
