@@ -31,7 +31,7 @@ $(NAME): $(OBJ) $(H_O)
 
 # Runs an example simulation.
 run: $(NAME)
-	./$(NAME) 10 100 100 100
+	./$(NAME) 10 1000 500 100
 
 # Runs the norm checker on each registered source file.
 nor:
