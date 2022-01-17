@@ -2,7 +2,6 @@
 
 #include "delegate.h"
 
-#include <stdio.h>
 void	delegate_start_simulation(struct s_delegate *this)
 {
 	int	i;
@@ -10,7 +9,6 @@ void	delegate_start_simulation(struct s_delegate *this)
 	i = 0;
 	while (i < this->philo_count)
 	{
-		printf("Loop: %zu\n", this->philosophers[i].index);
 		pthread_create(
 			&this->philosophers[i].thread,
 			NULL,

@@ -12,7 +12,10 @@ struct s_philo	*philo_new(size_t index, struct s_delegate *delegate)
 	return (this);
 }
 
-void	philo_create(struct s_philo *this, size_t index, struct s_delegate *delegate)
+void	philo_create(
+			struct s_philo *this,
+			size_t index,
+			struct s_delegate *delegate)
 {
 	if (this == NULL)
 		return ;

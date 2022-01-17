@@ -5,7 +5,7 @@
 
 # include "philo.h"
 
-typedef void *(*t_thread_run)(void *);
+typedef void	*(*t_thread_run)(void *);
 
 /*
  * A structure with the parameters of the simulation. Contains the philosophers

@@ -14,12 +14,12 @@ struct	s_delegate;
  * its state and an indicator wether he has died.
  */
 struct s_philo {
-	size_t			index;
-	pthread_t		thread;
-	struct s_fork	fork;
+	size_t				index;
+	pthread_t			thread;
+	struct s_fork		fork;
 	struct s_delegate	*delegate;
-	bool			has_died;
-	enum e_state	state;
+	bool				has_died;
+	enum e_state		state;
 };
 
 /*
@@ -32,7 +32,10 @@ struct s_philo	*philo_new(size_t index, struct s_delegate *delegate);
  * Initializes the given philosopher object. Does nothing if no object is
  * given.
  */
-void			philo_create(struct s_philo *this, size_t index, struct s_delegate *delegate);
+void			philo_create(
+					struct s_philo *this,
+					size_t index,
+					struct s_delegate *delegate);
 
 /*
  * Starts simulating the given philosopher.
