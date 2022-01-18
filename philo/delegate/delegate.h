@@ -17,15 +17,15 @@ typedef void	*(*t_thread_run)(void *);
  * themselves as well as their count and the timeout values.
  */
 struct s_delegate {
-	int				time_to_sleep;
-	int				time_to_eat;
-	int				time_to_die;
-	int				philo_count;
-	int				meal_count;
-	bool			meal_count_set;
-	bool			simulation_running;
-	struct timeval	start_time;
-	struct s_philo	philosophers[];
+	volatile int			time_to_sleep;
+	volatile int			time_to_eat;
+	volatile int			time_to_die;
+	volatile int			meal_count;
+	volatile bool			meal_count_set;
+	volatile struct timeval	start_time;
+	int						philo_count;
+	bool					simulation_running;
+	struct s_philo			philosophers[];
 };
 
 /*

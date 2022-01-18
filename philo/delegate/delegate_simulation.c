@@ -15,7 +15,7 @@ void	delegate_start_simulation(struct s_delegate *this)
 {
 	int	i;
 
-	gettimeofday(&this->start_time, NULL);
+	gettimeofday((struct timeval *) &this->start_time, NULL);
 	i = 0;
 	while (i < this->philo_count)
 	{

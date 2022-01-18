@@ -5,7 +5,7 @@ int	delegate_get_time_stamp(struct s_delegate *this)
 	struct timeval	t;
 
 	gettimeofday(&t, NULL);
-	return (delegate_get_time_diff(&t, &this->start_time));
+	return (delegate_get_time_diff(&t, (struct timeval *) &this->start_time));
 }
 
 int	delegate_get_time_diff(struct timeval *t1, struct timeval *t2)
