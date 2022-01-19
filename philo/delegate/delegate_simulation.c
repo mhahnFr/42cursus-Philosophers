@@ -6,8 +6,17 @@
 
 void	delegate_async_check(struct s_delegate *this)
 {
-	while (this->simulation_running)
+	bool	helper;
+
+	pthread_mutex_lock(&this->simulation_state_mutex);
+	helper = this->simulation_running;
+	while (helper)
+	{
+		pthread_mutex_unlock(&this->simulation_state_mutex);
 		usleep(100); // TODO Better checking time
+		pthread_mutex_lock(&this->simulation_state_mutex);
+		helper = this->simulation_running;
+	}
 	delegate_stop_simulation(this);
 }
 

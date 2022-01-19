@@ -23,6 +23,8 @@ struct s_delegate {
 	volatile int			meal_count;
 	volatile bool			meal_count_set;
 	volatile struct timeval	start_time;
+	pthread_mutex_t			print_mutex;
+	pthread_mutex_t			simulation_state_mutex;
 	int						philo_count;
 	bool					simulation_running;
 	struct s_philo			philosophers[];
