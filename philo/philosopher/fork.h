@@ -25,6 +25,16 @@ struct s_fork	*fork_new(void);
 void			fork_create(struct s_fork *this);
 
 /*
+ * Returns wether the given fork is taken. Locks its mutex to retrieve the data.
+ */
+bool			fork_is_taken(struct s_fork *this);
+
+/*
+ * Attempts to take the given fork. Returns true on success, false if the fork is already taken.
+ */
+bool			fork_take(struct s_fork *this);
+
+/*
  * Deinitializes the given fork object. Does nothing if no object is given.
  */
 void			fork_destroy(struct s_fork *this);

@@ -17,6 +17,7 @@ void	delegate_async_check(struct s_delegate *this)
 		pthread_mutex_lock(&this->simulation_state_mutex);
 		helper = this->simulation_running;
 	}
+	pthread_mutex_unlock(&this->simulation_state_mutex);
 	delegate_stop_simulation(this);
 }
 
