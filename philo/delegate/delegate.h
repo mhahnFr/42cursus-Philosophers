@@ -78,6 +78,11 @@ void				delegate_mark_simulation(
 						bool running);
 
 /*
+ * Returns wether the simulation is still running.
+ */
+bool                delegate_simulation_ongoing(struct s_delegate *this);
+
+/*
  * Returns the number of milliseconds that have passed since the beginning of
  * the simulation.
  */

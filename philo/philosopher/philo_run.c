@@ -37,5 +37,7 @@ void	philo_run(struct s_philo *this)
 			printf("%d %zu has died\n", delegate_get_time_stamp(this->delegate),
 				this->index);
 		}
+        else if (this->state == STOPPED)
+            break ;
 	}
 }

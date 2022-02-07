@@ -9,6 +9,7 @@ enum e_state {
 	EATING,
 	SLEEPING,
 	THINKING,
+    STOPPED,
 	UNDEFINED
 };
 
