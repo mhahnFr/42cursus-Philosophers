@@ -35,6 +35,11 @@ bool			fork_is_taken(struct s_fork *this);
 bool			fork_take(struct s_fork *this);
 
 /*
+ * Drops the given fork.
+ */
+void			fork_drop(struct s_fork *this);
+
+/*
  * Deinitializes the given fork object. Does nothing if no object is given.
  */
 void			fork_destroy(struct s_fork *this);

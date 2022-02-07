@@ -22,7 +22,6 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 {
 	struct timeval	t;
 
-	(void) time;
 	while (!fork_take(&this->fork))
 		usleep(100);
 	pthread_mutex_lock(&this->delegate->print_mutex);
@@ -39,6 +38,8 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 		>= this->delegate->time_to_die)
 		return (DIED);
 	this->last_eat_time = t;
-	// TODO Eat to death
+	usleep(time * 1000);
+	fork_drop(&this->fork);
+	fork_drop(&this->delegate->philosophers[this->index - 1].fork);
 	return (EATING);
 }

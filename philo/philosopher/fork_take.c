@@ -24,3 +24,10 @@ bool	fork_take(struct s_fork *this)
 	pthread_mutex_unlock(&this->mutex);
 	return (taken);
 }
+
+void    fork_drop(struct s_fork *this)
+{
+    pthread_mutex_lock(&this->mutex);
+    this->taken = false;
+    pthread_mutex_unlock(&this->mutex);
+}
