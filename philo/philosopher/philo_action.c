@@ -4,42 +4,62 @@
 #include "philo.h"
 #include "delegate/delegate.h"
 
-enum e_state	philo_sleep_or_die(struct s_philo *this, int time)
+static long	philo_now(void)
 {
 	struct timeval	t;
-
+	
 	gettimeofday(&t, NULL);
-	if (time > this->delegate->time_to_die)
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
+}
+
+static bool	philo_sleep(struct s_philo *this, int time)
+{
+	long	start;
+	long	now;
+	
+	start = philo_now();
+	now = start;
+	while (now < start + time)
 	{
-		usleep(this->delegate->time_to_die * 1000);
-		return (DIED);
+		usleep(100);
+		now = philo_now();
+		if (this->last_eat_time + this->delegate->time_to_die < now)
+			return (false);
 	}
-	usleep(time * 1000);
-	return (SLEEPING);
+	return (true);
+}
+
+enum e_state	philo_sleep_or_die(struct s_philo *this, int time)
+{
+	if (philo_sleep(this, time))
+		return (SLEEPING);
+	return (DIED);
 }
 
 enum e_state	philo_eat(struct s_philo *this, int time)
 {
-	struct timeval	t;
+	enum e_state	state;
+	size_t			index;
 
 	while (!fork_take(&this->fork))
-		usleep(100);
+		if (!philo_sleep(this, 100))
+			return (DIED);
 	pthread_mutex_lock(&this->delegate->print_mutex);
 	printf("%d %zu has taken a fork\n", delegate_get_time_stamp(this->delegate), this->index);
 	pthread_mutex_unlock(&this->delegate->print_mutex);
-	while (!fork_take(&this->delegate->philosophers[this->index - 1].fork))
-		usleep(100);
+	index = this->index - 1;
+	if (this->index == 0)
+		index = this->delegate->philo_count - 1;
+	while (!fork_take(&this->delegate->philosophers[index].fork))
+		if (!philo_sleep(this, 100))
+			return (DIED);
 	pthread_mutex_lock(&this->delegate->print_mutex);
 	printf("%d %zu has taken a fork\n", delegate_get_time_stamp(this->delegate), this->index);
 	printf("%d %zu is eating\n", delegate_get_time_stamp(this->delegate), this->index);
 	pthread_mutex_unlock(&this->delegate->print_mutex);
-	gettimeofday(&t, NULL);
-	if (delegate_get_time_diff(&t, &this->last_eat_time)
-		>= this->delegate->time_to_die)
-		return (DIED);
-	this->last_eat_time = t;
-	usleep(time * 1000);
+	this->last_eat_time = philo_now();
+	state = philo_sleep(this, time);
 	fork_drop(&this->fork);
-	fork_drop(&this->delegate->philosophers[this->index - 1].fork);
-	return (EATING);
+	fork_drop(&this->delegate->philosophers[index].fork);
+	return (state);
 }
