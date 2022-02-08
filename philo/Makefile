@@ -22,7 +22,7 @@ OBJ = $(patsubst %.c,%.o,$(SRC))
 CFLAGS = -Wall -Werror -Wextra -g -I. #-Ofast
 
 # The flags to link with.
-LDFLAGS = 
+LDFLAGS = -pthread
 
 
 # Makes whatever is needed.
