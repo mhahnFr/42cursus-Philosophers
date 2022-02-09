@@ -47,9 +47,7 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 		if (state != EATING)
 			return (state);
 	}
-	pthread_mutex_lock(&this->delegate->print_mutex);
-	printf("%d %zu has taken a fork\n", delegate_get_time_stamp(this->delegate), this->index);
-	pthread_mutex_unlock(&this->delegate->print_mutex);
+	delegate_print(this->delegate, this->index, " has taken a fork");
 	index = this->index - 1;
 	if (this->index == 0)
 		index = this->delegate->philo_count - 1;
@@ -59,10 +57,8 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 		if (state != EATING)
 			return (state);
 	}
-	pthread_mutex_lock(&this->delegate->print_mutex);
-	printf("%d %zu has taken a fork\n", delegate_get_time_stamp(this->delegate), this->index);
-	printf("%d %zu is eating\n", delegate_get_time_stamp(this->delegate), this->index);
-	pthread_mutex_unlock(&this->delegate->print_mutex);
+	delegate_print(this->delegate, this->index, " has taken a fork");
+	delegate_print(this->delegate, this->index, " is eating");
 	this->last_eat_time = philo_now();
 	state = philo_sleep(this, time, EATING);
 	fork_drop(&this->fork);

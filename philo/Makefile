@@ -6,7 +6,7 @@ SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c  \
 	  ./utils/ft_strings.c ./delegate/delegate_validation.c                   \
 	  ./philosopher/fork.c ./philosopher/philo_run.c                          \
 	  ./delegate/delegate_simulation.c ./delegate/delegate_time.c             \
-	  ./philosopher/philo_action.c ./philosopher/fork_take.c
+	  ./philosopher/philo_action.c ./philosopher/fork_take.c ./delegate/delegate_print.c
 
 # The header files.
 HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h       \

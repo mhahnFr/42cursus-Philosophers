@@ -9,14 +9,12 @@ enum e_state	philo_do_or_die(
 {
 	if (action == SLEEPING)
 	{
-		printf("%d %zu is sleeping\n", delegate_get_time_stamp(this->delegate),
-			this->index);
+		delegate_print(this->delegate, this->index, " is sleeping");
 		action = philo_sleep_or_die(this, this->delegate->time_to_sleep);
 	}
 	else if (action == EATING)
 	{
-		printf("%d %zu is thinking\n", delegate_get_time_stamp(this->delegate),
-			this->index);
+		delegate_print(this->delegate, this->index, " is thinking");
 		action = philo_eat(this, this->delegate->time_to_eat);
 	}
 	return (action);
@@ -34,8 +32,7 @@ void	philo_run(struct s_philo *this)
 		{
 			this->has_died = true;
 			delegate_mark_simulation(this->delegate, false);
-			printf("%d %zu has died\n", delegate_get_time_stamp(this->delegate),
-				this->index);
+			delegate_print(this->delegate, this->index, " has died");
 		}
         else if (this->state == STOPPED)
             break ;
