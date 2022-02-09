@@ -12,9 +12,6 @@ SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c  \
 HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h       \
 	  ./philosopher/fork.h ./utils/utils.h
 
-# The header object files.
-H_O = $(patsubst %.h,%.gch,$(HDR))
-
 # The object files.
 OBJ = $(patsubst %.c,%.o,$(SRC))
 
@@ -40,16 +37,13 @@ run: $(NAME)
 nor:
 	norminette $(SRC) $(HDR) | grep :
 
-%.gch: %.h
-	$(CC) $(CFLAGS) -c -o $@ $<
-
 # Compiles each file individually.
-%.o: %.c $(H_O)
+%.o: %.c $(HDR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Removes all temporary files.
 clean:
-	- $(RM) $(OBJ) $(H_O)
+	- $(RM) $(OBJ)
 	- $(RM) *~
 	- find . -name \*~ -print -delete
 
