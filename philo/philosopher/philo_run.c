@@ -28,13 +28,13 @@ void	philo_run(struct s_philo *this)
 			this->state = philo_do_or_die(this, SLEEPING);
 		else if (this->state == THINKING || this->state == SLEEPING)
 			this->state = philo_do_or_die(this, EATING);
-		if (this->state == DIED)
+	        if (this->state == STOPPED)
+        	    break ;
+		else if (this->state == DIED)
 		{
 			this->has_died = true;
 			delegate_mark_simulation(this->delegate, false);
 			delegate_print(this->delegate, this->index, " has died");
 		}
-        else if (this->state == STOPPED)
-            break ;
 	}
 }
