@@ -41,6 +41,12 @@ void	delegate_destroy(struct s_delegate *this)
 
 	if (this == NULL)
 		return ;
+	i = 0;
+	while (i < this->philo_count)
+	{
+		pthread_join(this->philosophers[i].thread, NULL);
+		i++;
+	}
 	pthread_mutex_destroy(&this->print_mutex);
 	pthread_mutex_destroy(&this->simulation_state_mutex);
 	i = 0;

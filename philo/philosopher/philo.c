@@ -20,7 +20,10 @@ void	philo_create(
 	if (this == NULL)
 		return ;
 	this->index = index;
-	this->state = UNDEFINED;
+	if (this->index % 2 == 0)
+		this->state = UNDEFINED;
+	else
+		this->state = THINKING;
 	this->delegate = delegate;
 	this->has_died = false;
 	fork_create(&this->fork);
