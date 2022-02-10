@@ -16,10 +16,10 @@ HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h       \
 OBJ = $(patsubst %.c,%.o,$(SRC))
 
 # The flags to compile with.
-CFLAGS = -Wall -Werror -Wextra -g -I. #-Ofast
+CFLAGS = -Wall -Werror -Wextra -g -I. -fsanitize=thread #-Ofast
 
 # The flags to link with.
-LDFLAGS = -pthread
+LDFLAGS = -pthread -fsanitize=thread
 
 
 # Makes whatever is needed.
