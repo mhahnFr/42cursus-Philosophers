@@ -2,14 +2,14 @@
 NAME = philo
 
 # The source files.
-SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c  \
-	  ./utils/ft_strings.c ./delegate/delegate_validation.c                   \
-	  ./philosopher/fork.c ./philosopher/philo_run.c                          \
-	  ./delegate/delegate_simulation.c ./delegate/delegate_time.c             \
-	  ./philosopher/philo_action.c ./philosopher/fork_take.c ./delegate/delegate_print.c
+SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c     \
+	  ./utils/ft_strings.c ./delegate/delegate_validation.c                      \
+	  ./philosopher/fork.c ./philosopher/philo_run.c ./delegate/delegate_print.c \
+	  ./delegate/delegate_simulation.c ./delegate/delegate_time.c                \
+	  ./philosopher/philo_action.c ./philosopher/fork_take.c 
 
 # The header files.
-HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h       \
+HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h \
 	  ./philosopher/fork.h ./utils/utils.h
 
 # The object files.
@@ -25,6 +25,10 @@ LDFLAGS = -pthread -fsanitize=thread
 # Makes whatever is needed.
 all: $(NAME)
 
+# Runs the norm checker on the registered source files.
+nor:
+	norminette $(SRC) $(HDR) | grep -v "header"
+
 # Makes whatever is needed for the executable.
 $(NAME): $(OBJ) $(H_O)
 	$(CC) $(LDFLAGS) -o $(NAME) $(OBJ)
@@ -32,10 +36,6 @@ $(NAME): $(OBJ) $(H_O)
 # Runs an example simulation.
 run: $(NAME)
 	./$(NAME) 10 1000 500 100
-
-# Runs the norm checker on each registered source file.
-nor:
-	norminette $(SRC) $(HDR) | grep :
 
 # Compiles each file individually.
 %.o: %.c $(HDR)
@@ -54,4 +54,4 @@ fclean: clean
 # Removes all files created by this makefile and recompiles the project.
 re: fclean all
 
-.PHONY: all nor clean fclean re
+.PHONY: all nor clean fclean re nor

@@ -19,7 +19,7 @@ struct s_philo {
 	pthread_t			thread;
 	struct s_fork		fork;
 	struct s_delegate	*delegate;
-	long		   		last_eat_time;
+	long				last_eat_time;
 	bool				has_died;
 	enum e_state		state;
 };

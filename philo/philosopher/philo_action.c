@@ -7,16 +7,19 @@
 static long	philo_now(void)
 {
 	struct timeval	t;
-	
+
 	gettimeofday(&t, NULL);
 	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
-static enum e_state	philo_sleep(struct s_philo *this, int time, enum e_state state)
+static enum e_state	philo_sleep(
+		struct s_philo *this,
+		int time,
+		enum e_state state)
 {
 	long	start;
 	long	now;
-	
+
 	start = philo_now();
 	now = start;
 	while (now < start + time)
@@ -64,13 +67,15 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 		state = philo_take_fork(this, &this->fork);
 		if (state != EATING)
 			return (state);
-		state = philo_take_fork(this, &this->delegate->philosophers[index].fork);
+		state = philo_take_fork(
+				this, &this->delegate->philosophers[index].fork);
 		if (state != EATING)
 			return (state);
 	}
 	else
 	{
-		state = philo_take_fork(this, &this->delegate->philosophers[index].fork);
+		state = philo_take_fork(
+				this, &this->delegate->philosophers[index].fork);
 		if (state != EATING)
 			return (state);
 		state = philo_take_fork(this, &this->fork);

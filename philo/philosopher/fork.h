@@ -30,7 +30,8 @@ void			fork_create(struct s_fork *this);
 bool			fork_is_taken(struct s_fork *this);
 
 /*
- * Attempts to take the given fork. Returns true on success, false if the fork is already taken.
+ * Attempts to take the given fork. Returns true on success, false if the fork
+ * is already taken.
  */
 bool			fork_take(struct s_fork *this);
 

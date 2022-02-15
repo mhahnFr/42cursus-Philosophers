@@ -80,7 +80,7 @@ void				delegate_mark_simulation(
 /*
  * Returns wether the simulation is still running.
  */
-bool                delegate_simulation_ongoing(struct s_delegate *this);
+bool				delegate_simulation_ongoing(struct s_delegate *this);
 
 /*
  * Returns the number of milliseconds that have passed since the beginning of
@@ -95,10 +95,13 @@ int					delegate_get_time_diff(
 						struct timeval *t1,
 						struct timeval *t2);
 /*
- * Prints the given string on the standard output. Additionally, the current timestamp and
- * the index of the philosopher are printed.
+ * Prints the given string on the standard output. Additionally, the current
+ * timestamp and the index of the philosopher are printed.
  */
-void				delegate_print(struct s_delegate *this, size_t philo_index, char *what);
+void				delegate_print(
+						struct s_delegate *this,
+						size_t philo_index,
+						char *what);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.

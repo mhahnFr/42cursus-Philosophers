@@ -28,8 +28,8 @@ void	philo_run(struct s_philo *this)
 			this->state = philo_do_or_die(this, SLEEPING);
 		else if (this->state == THINKING || this->state == SLEEPING)
 			this->state = philo_do_or_die(this, EATING);
-	        if (this->state == STOPPED)
-        	    break ;
+		if (this->state == STOPPED)
+			break ;
 		else if (this->state == DIED)
 		{
 			this->has_died = true;

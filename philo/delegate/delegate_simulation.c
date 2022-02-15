@@ -30,7 +30,8 @@ void	delegate_start_simulation(struct s_delegate *this)
 	i = 0;
 	while (i < this->philo_count)
 	{
-		this->philosophers[i].last_eat_time = this->start_time.tv_sec * 1000 + this->start_time.tv_usec / 1000;
+		this->philosophers[i].last_eat_time
+			= this->start_time.tv_sec * 1000 + this->start_time.tv_usec / 1000;
 		pthread_create(
 			&this->philosophers[i].thread,
 			NULL,
