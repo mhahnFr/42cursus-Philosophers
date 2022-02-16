@@ -44,7 +44,6 @@ static bool	philo_take_fork(
 		struct s_fork *fork,
 		enum e_state *state)
 {
-
 	*state = EATING;
 	while (!fork_take(fork))
 	{
@@ -66,18 +65,16 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 		index = this->delegate->philo_count - 1;
 	if (this->index % 2)
 	{
-		if (!philo_take_fork(this, &this->fork, &state))
-			return (state);
-		if (!philo_take_fork(this, &this->delegate->philosophers[index].fork, &state))
+		if (!philo_take_fork(this, &this->fork, &state)
+			|| !philo_take_fork(this,
+				&this->delegate->philosophers[index].fork, &state))
 			return (state);
 	}
 	else
-	{
-		if (!philo_take_fork(this, &this->delegate->philosophers[index].fork, &state))
+		if (!philo_take_fork(this,
+				&this->delegate->philosophers[index].fork, &state)
+			|| !philo_take_fork(this, &this->fork, &state))
 			return (state);
-		if (!philo_take_fork(this, &this->fork, &state))
-			return (state);
-	}
 	delegate_print(this->delegate, this->index, " is eating");
 	this->last_eat_time = philo_now();
 	state = philo_sleep(this, time, EATING);
