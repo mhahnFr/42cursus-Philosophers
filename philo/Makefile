@@ -35,7 +35,7 @@ $(NAME): $(OBJ) $(H_O)
 
 # Runs an example simulation.
 run: $(NAME)
-	./$(NAME) 10 1000 500 100
+	./$(NAME) 8 800 200 200
 
 # Compiles each file individually.
 %.o: %.c $(HDR)
