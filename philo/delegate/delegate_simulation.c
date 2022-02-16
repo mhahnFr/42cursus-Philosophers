@@ -61,6 +61,12 @@ void	delegate_mark_simulation(struct s_delegate *this, bool running)
 
 void	delegate_stop_simulation(struct s_delegate *this)
 {
-	(void) this;
-	// TODO Stop all running threads
+	long	i;
+
+	i = 0;
+	while (i < this->philo_count)
+	{
+		pthread_join(this->philosophers[i].thread, NULL);
+		i++;
+	}
 }
