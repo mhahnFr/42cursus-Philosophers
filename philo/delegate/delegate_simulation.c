@@ -15,18 +15,8 @@ static void	delegate_set_simulation_started(
 
 void	delegate_async_check(struct s_delegate *this)
 {
-	bool	helper;
-
-	pthread_mutex_lock(&this->simulation_state_mutex);
-	helper = this->simulation_running;
-	while (helper)
-	{
-		pthread_mutex_unlock(&this->simulation_state_mutex);
-		usleep(100); // TODO Better checking time
-		pthread_mutex_lock(&this->simulation_state_mutex);
-		helper = this->simulation_running;
-	}
-	pthread_mutex_unlock(&this->simulation_state_mutex);
+	while (delegate_simulation_ongoing(this))
+		usleep(50);
 	delegate_stop_simulation(this);
 }
 
