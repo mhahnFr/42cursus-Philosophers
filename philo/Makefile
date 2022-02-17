@@ -3,10 +3,11 @@ NAME = philo
 
 # The source files.
 SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c     \
-	  ./utils/ft_strings.c ./delegate/delegate_validation.c                      \
-	  ./philosopher/fork.c ./philosopher/philo_run.c ./delegate/delegate_print.c \
+	  ./utils/ft_strings.c ./delegate/delegate_validation.c ./philosopher/fork.c \
+	   ./philosopher/philo_run.c ./delegate/delegate_print.c                     \
 	  ./delegate/delegate_simulation.c ./delegate/delegate_time.c                \
-	  ./philosopher/philo_action.c ./philosopher/fork_take.c 
+	  ./philosopher/philo_action.c ./philosopher/fork_take.c                     \
+	  ./delegate/delegate_checks.c
 
 # The header files.
 HDR = ./philosopher/philo.h ./philosopher/state.h ./delegate/delegate.h \
@@ -24,6 +25,10 @@ LDFLAGS = -pthread -fsanitize=thread
 
 # Makes whatever is needed.
 all: $(NAME)
+
+# Runs the simulation with an impossible high amount of threads.
+ruin: $(NAME)
+	./$(NAME) 20000 800 200 200
 
 # Runs the norm checker on the registered source files.
 nor:

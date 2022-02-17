@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 #include "delegate/delegate.h"
 #include "philo.h"
@@ -20,8 +21,20 @@ enum e_state	philo_do_or_die(
 	return (action);
 }
 
+static bool	philo_await_start(struct s_philo *this)
+{
+	while (delegate_simulation_ongoing(this->delegate)
+		&& !delegate_simulation_started(this->delegate))
+		usleep(50);
+	if (!delegate_simulation_ongoing(this->delegate))
+		return (false);
+	return (true);
+}
+
 void	philo_run(struct s_philo *this)
 {
+	if (!philo_await_start(this))
+		return ;
 	while (!this->has_died)
 	{
 		if (this->state == EATING || this->state == UNDEFINED)

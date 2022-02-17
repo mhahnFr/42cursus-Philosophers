@@ -27,6 +27,7 @@ struct s_delegate {
 	pthread_mutex_t			simulation_state_mutex;
 	int						philo_count;
 	bool					simulation_running;
+	bool					simulation_started;
 	struct s_philo			philosophers[];
 };
 
@@ -57,6 +58,8 @@ bool				delegate_validate(struct s_delegate *this);
  * has been invoked. Does nothing if no delegate object is given.
  */
 void				delegate_invalidate(struct s_delegate *this);
+
+bool				delegate_simulation_started(struct s_delegate *this);
 
 /*
  * Starts the philosophers simulation. For each philosopher, a thread is

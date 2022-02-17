@@ -4,6 +4,15 @@
 
 #include "delegate.h"
 
+static void	delegate_set_simulation_started(
+		struct s_delegate *this,
+		bool value)
+{
+	pthread_mutex_lock(&this->simulation_state_mutex);
+	this->simulation_started = value;
+	pthread_mutex_unlock(&this->simulation_state_mutex);
+}
+
 void	delegate_async_check(struct s_delegate *this)
 {
 	bool	helper;
@@ -26,30 +35,26 @@ void	delegate_start_simulation(struct s_delegate *this)
 	int	i;
 
 	gettimeofday((struct timeval *) &this->start_time, NULL);
-	this->simulation_running = true;
 	i = 0;
 	while (i < this->philo_count)
 	{
 		this->philosophers[i].last_eat_time
 			= this->start_time.tv_sec * 1000 + this->start_time.tv_usec / 1000;
-		pthread_create(
-			&this->philosophers[i].thread,
-			NULL,
-			(t_thread_run) philo_run,
-			(void *) &this->philosophers[i]);
+		if (pthread_create(
+				&this->philosophers[i].thread,
+				NULL,
+				(t_thread_run) philo_run,
+				(void *) &this->philosophers[i]) != 0)
+		{
+			printf("Could not create thread for philosopher %d!\n", i);
+			delegate_mark_simulation(this, false);
+			delegate_stop_simulation(this);
+			return ;
+		}
 		i++;
 	}
+	delegate_set_simulation_started(this, true);
 	delegate_async_check(this);
-}
-
-bool	delegate_simulation_ongoing(struct s_delegate *this)
-{
-	bool	ret;
-
-	pthread_mutex_lock(&this->simulation_state_mutex);
-	ret = this->simulation_running;
-	pthread_mutex_unlock(&this->simulation_state_mutex);
-	return (ret);
 }
 
 void	delegate_mark_simulation(struct s_delegate *this, bool running)
