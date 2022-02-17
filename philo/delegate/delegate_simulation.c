@@ -52,8 +52,6 @@ void	delegate_mark_simulation(struct s_delegate *this, bool running)
 	pthread_mutex_lock(&this->simulation_state_mutex);
 	this->simulation_running = running;
 	pthread_mutex_unlock(&this->simulation_state_mutex);
-	if (!running)
-		pthread_mutex_lock(&this->print_mutex);
 }
 
 void	delegate_stop_simulation(struct s_delegate *this)
