@@ -35,20 +35,14 @@ void	philo_run(struct s_philo *this)
 {
 	if (!philo_await_start(this))
 		return ;
-	while (!this->has_died)
+	this->last_eat_time
+		= this->delegate->start_time.tv_sec * 1000 + this->delegate->start_time.tv_usec / 1000;
+	while (this->state != DIED && this->state != STOPPED)
 	{
 		if (this->state == EATING || this->state == UNDEFINED)
 			this->state = philo_do_or_die(this, SLEEPING);
 		else if (this->state == THINKING || this->state == SLEEPING)
 			this->state = philo_do_or_die(this, EATING);
-		if (this->state == STOPPED || this->state == DIED)
-			break ;
-		/*else if (this->state == DIED)
-		{
-			this->has_died = true;
-			delegate_mark_simulation(this->delegate, false);
-			delegate_print(this->delegate, this->index, " has died");
-		}*/
 	}
 	if (this->state == DIED)
 	{

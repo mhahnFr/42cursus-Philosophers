@@ -16,7 +16,7 @@ static void	delegate_set_simulation_started(
 void	delegate_async_check(struct s_delegate *this)
 {
 	while (delegate_simulation_ongoing(this))
-		usleep(50);
+		usleep(1000);
 	delegate_stop_simulation(this);
 }
 
@@ -24,12 +24,9 @@ void	delegate_start_simulation(struct s_delegate *this)
 {
 	int	i;
 
-	gettimeofday((struct timeval *) &this->start_time, NULL);
 	i = 0;
 	while (i < this->philo_count)
 	{
-		this->philosophers[i].last_eat_time
-			= this->start_time.tv_sec * 1000 + this->start_time.tv_usec / 1000;
 		if (pthread_create(
 				&this->philosophers[i].thread,
 				NULL,
@@ -43,6 +40,7 @@ void	delegate_start_simulation(struct s_delegate *this)
 		}
 		i++;
 	}
+	gettimeofday((struct timeval *) &this->start_time, NULL);
 	delegate_set_simulation_started(this, true);
 	delegate_async_check(this);
 }
