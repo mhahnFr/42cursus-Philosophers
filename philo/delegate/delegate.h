@@ -24,10 +24,12 @@ struct s_delegate {
 	volatile bool			meal_count_set;
 	volatile struct timeval	start_time;
 	pthread_mutex_t			print_mutex;
+	pthread_mutex_t			print_available_mutex;
 	pthread_mutex_t			simulation_state_mutex;
 	int						philo_count;
 	bool					simulation_running;
 	bool					simulation_started;
+	bool					print_available;
 	struct s_philo			philosophers[];
 };
 
@@ -59,6 +61,9 @@ bool				delegate_validate(struct s_delegate *this);
  */
 void				delegate_invalidate(struct s_delegate *this);
 
+/*
+ * Returns wether the simulation has started.
+ */
 bool				delegate_simulation_started(struct s_delegate *this);
 
 /*
@@ -105,6 +110,18 @@ void				delegate_print(
 						struct s_delegate *this,
 						size_t philo_index,
 						char *what);
+
+/*
+ * Finishes the simulation. Prints the given philosopher as death reason.
+ */
+void				delegate_finish_simulation(
+						struct s_delegate *this,
+						struct s_philo *reason);
+
+/*
+ * Returns wether a thread may print something on the standard output.
+ */
+bool				delegate_get_print_available(struct s_delegate *this);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.

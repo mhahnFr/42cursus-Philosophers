@@ -47,7 +47,6 @@ void	philo_run(struct s_philo *this)
 	if (this->state == DIED)
 	{
 		this->has_died = true;
-		delegate_mark_simulation(this->delegate, false);
-		delegate_print(this->delegate, this->index, " has died");
+		delegate_finish_simulation(this->delegate, this);
 	}
 }

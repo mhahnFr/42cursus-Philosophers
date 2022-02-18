@@ -34,7 +34,7 @@ void	delegate_start_simulation(struct s_delegate *this)
 				(void *) &this->philosophers[i]) != 0)
 		{
 			printf("Could not create thread for philosopher %d!\n", i);
-			delegate_mark_simulation(this, false);
+			delegate_finish_simulation(this, NULL);
 			delegate_stop_simulation(this);
 			return ;
 		}
@@ -45,11 +45,16 @@ void	delegate_start_simulation(struct s_delegate *this)
 	delegate_async_check(this);
 }
 
-void	delegate_mark_simulation(struct s_delegate *this, bool running)
+void	delegate_finish_simulation(struct s_delegate *this, struct s_philo *reason)
 {
 	pthread_mutex_lock(&this->simulation_state_mutex);
-	this->simulation_running = running;
+	this->simulation_running = false;
 	pthread_mutex_unlock(&this->simulation_state_mutex);
+	pthread_mutex_lock(&this->print_available_mutex);
+	this->print_available = false;
+	pthread_mutex_unlock(&this->print_available_mutex);
+	if (reason != NULL)
+		printf("%d %zu has died\n", delegate_get_time_stamp(this), reason->index);
 }
 
 void	delegate_stop_simulation(struct s_delegate *this)
