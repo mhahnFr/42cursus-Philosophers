@@ -45,7 +45,9 @@ void	delegate_start_simulation(struct s_delegate *this)
 	delegate_async_check(this);
 }
 
-void	delegate_finish_simulation(struct s_delegate *this, struct s_philo *reason)
+void	delegate_finish_simulation(
+			struct s_delegate *this,
+			struct s_philo *reason)
 {
 	pthread_mutex_lock(&this->simulation_state_mutex);
 	this->simulation_running = false;
@@ -54,7 +56,8 @@ void	delegate_finish_simulation(struct s_delegate *this, struct s_philo *reason)
 	this->print_available = false;
 	pthread_mutex_unlock(&this->print_available_mutex);
 	if (reason != NULL)
-		printf("%d %zu has died\n", delegate_get_time_stamp(this), reason->index);
+		printf("%d %zu has died\n", delegate_get_time_stamp(this),
+			reason->index);
 }
 
 void	delegate_stop_simulation(struct s_delegate *this)

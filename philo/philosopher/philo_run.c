@@ -35,8 +35,8 @@ void	philo_run(struct s_philo *this)
 {
 	if (!philo_await_start(this))
 		return ;
-	this->last_eat_time
-		= this->delegate->start_time.tv_sec * 1000 + this->delegate->start_time.tv_usec / 1000;
+	this->last_eat_time = this->delegate->start_time.tv_sec * 1000
+		+ this->delegate->start_time.tv_usec / 1000;
 	while (this->state != DIED && this->state != STOPPED)
 	{
 		if (this->state == EATING || this->state == UNDEFINED)
