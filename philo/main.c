@@ -13,21 +13,25 @@
  */
 static struct s_delegate	*cli(const char **argv, const int argc)
 {
+	int					philo_count;
 	struct s_delegate	*delegate;
 
-	if (argc < 5 || argc > 6)
+	if (argc < 5 || argc > 6 || !ft_isnum(argv[1])
+		|| !ft_atoi_error(argv[1], &philo_count))
 		return (NULL);
-	delegate = delegate_new(ft_atoi(argv[1]));
+	delegate = delegate_new(philo_count);
 	if (delegate == NULL)
 		return (NULL);
-	if (!ft_atoi_error(argv[2], (int *) &delegate->time_to_die)
+	if (!ft_isnum(argv[2]) || !ft_isnum(argv[3]) || !ft_isnum(argv[4])
+		|| !ft_atoi_error(argv[2], (int *) &delegate->time_to_die)
 		|| !ft_atoi_error(argv[3], (int *) &delegate->time_to_eat)
 		|| !ft_atoi_error(argv[4], (int *) &delegate->time_to_sleep))
 		delegate_invalidate(delegate);
 	delegate->meal_count_set = false;
 	if (argc > 5)
 	{
-		if (!ft_atoi_error(argv[5], (int *) &delegate->meal_count))
+		if (!ft_isnum(argv[5])
+			|| !ft_atoi_error(argv[5], (int *) &delegate->meal_count))
 			delegate_invalidate(delegate);
 		delegate->meal_count_set = true;
 	}

@@ -33,6 +33,12 @@ bool	ft_atoi_base(
 char	*ft_strchr(const char *string, const char c);
 
 /*
+ * Returns wether the given string looks like a valid number. Returns false for
+ * no or an empty string.
+ */
+bool	ft_isnum(const char *string);
+
+/*
  * Returns wether the given character is a whitespace.
  */
 bool	ft_is_whitespace(const char c);
