@@ -1,6 +1,9 @@
 # The name of the executable.
 NAME = philo
 
+# The name of the tags file.
+TAGS = tags
+
 # The source files.
 SRC = ./main.c ./philosopher/philo.c ./delegate/delegate.c ./utils/ft_atoi.c     \
 	  ./utils/ft_strings.c ./delegate/delegate_validation.c ./philosopher/fork.c \
@@ -46,6 +49,11 @@ run: $(NAME)
 %.o: %.c $(HDR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+# Creates the tags file.
+$(TAGS):
+	$(RM) $(TAGS)
+	ctags -t -f $(TAGS) $(HDR) $(SRC)
+
 # Removes all temporary files.
 clean:
 	- $(RM) $(OBJ)
@@ -59,4 +67,4 @@ fclean: clean
 # Removes all files created by this makefile and recompiles the project.
 re: fclean all
 
-.PHONY: all nor clean fclean re nor
+.PHONY: all nor clean fclean re nor $(TAGS)
