@@ -26,7 +26,9 @@ struct s_delegate {
 	pthread_mutex_t			print_mutex;
 	pthread_mutex_t			print_available_mutex;
 	pthread_mutex_t			simulation_state_mutex;
+	pthread_mutex_t			full_philos_mutex;
 	int						philo_count;
+	int						full_philos;
 	bool					simulation_running;
 	bool					simulation_started;
 	bool					print_available;
@@ -84,6 +86,16 @@ void				delegate_stop_simulation(struct s_delegate *this);
 void				delegate_mark_simulation(
 						struct s_delegate *this,
 						bool running);
+
+/*
+ * Safely increases the number of full philos by one.
+ */
+void				delegate_increase_full_philos(struct s_delegate *this);
+
+/*
+ * Safely returns the number of full philos.
+ */
+int					delegate_get_full_philos(struct s_delegate *this);
 
 /*
  * Returns wether the simulation is still running.

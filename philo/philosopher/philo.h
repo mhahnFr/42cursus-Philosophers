@@ -21,6 +21,7 @@ struct s_philo {
 	struct s_delegate	*delegate;
 	long				last_eat_time;
 	bool				has_died;
+	int					meals;
 	enum e_state		state;
 };
 

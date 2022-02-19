@@ -24,6 +24,7 @@ void	philo_create(
 		this->state = UNDEFINED;
 	else
 		this->state = THINKING;
+	this->meals = 0;
 	this->delegate = delegate;
 	this->has_died = false;
 	fork_create(&this->fork);
