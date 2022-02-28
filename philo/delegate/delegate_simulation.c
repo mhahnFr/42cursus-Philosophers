@@ -17,7 +17,8 @@ void	delegate_async_check(struct s_delegate *this)
 {
 	while (delegate_simulation_ongoing(this))
 	{
-		if (this->meal_count_set && delegate_get_full_philos(this) == this->philo_count)
+		if (this->meal_count_set
+			&& delegate_get_full_philos(this) == this->philo_count)
 			delegate_finish_simulation(this, NULL);
 		usleep(1000);
 	}

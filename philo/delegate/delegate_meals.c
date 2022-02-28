@@ -1,6 +1,5 @@
 #include "delegate.h"
 
-
 void	delegate_increase_full_philos(struct s_delegate *this)
 {
 	pthread_mutex_lock(&this->full_philos_mutex);
