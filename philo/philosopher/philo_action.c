@@ -24,7 +24,7 @@ static enum e_state	philo_sleep(
 	now = start;
 	while (now < start + time)
 	{
-		usleep(250);
+		usleep(100);
 		now = philo_now();
 		if (!delegate_simulation_ongoing(this->delegate))
 			return (STOPPED);
