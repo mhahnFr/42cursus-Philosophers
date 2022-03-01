@@ -46,8 +46,10 @@ void	delegate_finish_simulation(
 			struct s_delegate *this,
 			struct s_philo *reason)
 {
+	bool	was;
+
 	pthread_mutex_lock(&this->print_mutex);
-	bool was = this->simulation_running;
+	was = this->simulation_running;
 	this->simulation_running = false;
 	pthread_mutex_unlock(&this->print_mutex);
 	if (reason != NULL && was)
