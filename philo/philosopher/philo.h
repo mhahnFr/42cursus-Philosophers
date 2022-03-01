@@ -69,6 +69,16 @@ enum e_state	philo_sleep_or_die(struct s_philo *this, int time);
 enum e_state	philo_eat(struct s_philo *this, int time);
 
 /*
+ * Updates the meal count for the given philosopher.
+ */
+void			philo_update_meals(struct s_philo *this);
+
+/*
+ * Returns the index of the philosopher on the left of the given one.
+ */
+size_t			philo_get_left_index(struct s_philo *this);
+
+/*
  * Destroys the given philosopher object. Does nothing if no object is given.
  */
 void			philo_destroy(struct s_philo *this);

@@ -69,9 +69,7 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 	enum e_state	state;
 	size_t			index;
 
-	index = this->index - 1;
-	if (this->index == 0)
-		index = this->delegate->philo_count - 1;
+	index = philo_get_left_index(this);
 	if (this->index % 2)
 	{
 		if (!philo_take_fork(this, &this->fork, &state)
@@ -90,8 +88,6 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 	state = philo_sleep(this, time, EATING);
 	fork_drop(&this->fork);
 	fork_drop(&this->delegate->philosophers[index].fork);
-	this->meals += 1;
-	if (this->delegate->meal_count_set && this->meals == this->delegate->meal_count)
-		delegate_increase_full_philos(this->delegate);
+	philo_update_meals(this);
 	return (state);
 }
