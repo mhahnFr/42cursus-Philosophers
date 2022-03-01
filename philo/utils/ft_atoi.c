@@ -2,6 +2,9 @@
 
 #include "utils.h"
 
+/*
+ * Assigns the given variable pointers the appopriate values.
+ */
 static void	ft_assign_trick(int *sign, char **pos, bool *ret, size_t *in)
 {
 	*sign = 1;
@@ -23,6 +26,9 @@ bool	ft_atoi_error(const char *string, int *i)
 	return (ft_atoi_base(string, i, "0123456789", 10));
 }
 
+/*
+ * Skips the whitespaces in the given string beginning with the given offset.
+ */
 static size_t	ft_whitespace_skipper(const char *string, size_t start)
 {
 	while (ft_is_whitespace(string[start]) && string[start] != '\0')

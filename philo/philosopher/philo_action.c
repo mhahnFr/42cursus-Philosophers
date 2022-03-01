@@ -4,6 +4,9 @@
 #include "philo.h"
 #include "delegate/delegate.h"
 
+/*
+ * Returns the current time in milliseconds.
+ */
 static long	philo_now(void)
 {
 	struct timeval	t;
@@ -12,6 +15,9 @@ static long	philo_now(void)
 	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
+/*
+ * Lets the given philosopher sleep until he slept the given time or he died.
+ */
 static enum e_state	philo_sleep(
 		struct s_philo *this,
 		int time,
@@ -37,6 +43,10 @@ enum e_state	philo_sleep_or_die(struct s_philo *this, int time)
 	return (philo_sleep(this, time, SLEEPING));
 }
 
+/*
+ * Tries to take the given fork. Returns true upon success, false if the given
+ * philosopher died or the simulation ended.
+ */
 static bool	philo_take_fork(
 		struct s_philo *this,
 		struct s_fork *fork,
