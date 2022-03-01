@@ -26,8 +26,6 @@ static enum e_state	philo_sleep(
 	{
 		usleep(100);
 		now = philo_now();
-		if (!delegate_simulation_ongoing(this->delegate))
-			return (STOPPED);
 		if (this->last_eat_time + this->delegate->time_to_die < now)
 			return (DIED);
 	}
@@ -47,12 +45,13 @@ static bool	philo_take_fork(
 	*state = EATING;
 	while (!fork_take(fork))
 	{
-		*state = philo_sleep(this, 100, EATING);
-		if (*state != EATING)
+		if (this->last_eat_time + this->delegate->time_to_die < philo_now())
+		{
+			*state = DIED;
 			return (false);
+		}
 	}
-	delegate_print(this->delegate, this->index, " has taken a fork");
-	return (true);
+	return (delegate_print(this->delegate, this->index, " has taken a fork"));
 }
 
 enum e_state	philo_eat(struct s_philo *this, int time)
@@ -75,7 +74,8 @@ enum e_state	philo_eat(struct s_philo *this, int time)
 				&this->delegate->philosophers[index].fork, &state)
 			|| !philo_take_fork(this, &this->fork, &state))
 			return (state);
-	delegate_print(this->delegate, this->index, " is eating");
+	if (!delegate_print(this->delegate, this->index, " is eating"))
+		return (STOPPED);
 	this->last_eat_time = philo_now();
 	state = philo_sleep(this, time, EATING);
 	fork_drop(&this->fork);

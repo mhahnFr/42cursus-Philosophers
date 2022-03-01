@@ -27,10 +27,8 @@ void	delegate_create(struct s_delegate *this, long philo_count)
 	this->philo_count = philo_count;
 	this->simulation_running = true;
 	this->simulation_started = false;
-	this->print_available = true;
 	pthread_mutex_init(&this->print_mutex, NULL);
 	pthread_mutex_init(&this->simulation_state_mutex, NULL);
-	pthread_mutex_init(&this->print_available_mutex, NULL);
 	pthread_mutex_init(&this->full_philos_mutex, NULL);
 	i = 0;
 	while (i < philo_count)
@@ -48,6 +46,7 @@ void	delegate_destroy(struct s_delegate *this)
 		return ;
 	pthread_mutex_destroy(&this->print_mutex);
 	pthread_mutex_destroy(&this->simulation_state_mutex);
+	pthread_mutex_destroy(&this->full_philos_mutex);
 	i = 0;
 	while (i < this->philo_count)
 	{

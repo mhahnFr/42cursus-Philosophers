@@ -4,23 +4,13 @@
 
 #include "delegate.h"
 
-static void	delegate_set_simulation_started(
-		struct s_delegate *this,
-		bool value)
-{
-	pthread_mutex_lock(&this->simulation_state_mutex);
-	this->simulation_started = value;
-	pthread_mutex_unlock(&this->simulation_state_mutex);
-}
-
 void	delegate_async_check(struct s_delegate *this)
 {
-	while (delegate_simulation_ongoing(this))
+	if (this->meal_count_set)
 	{
-		if (this->meal_count_set
-			&& delegate_get_full_philos(this) == this->philo_count)
-			delegate_finish_simulation(this, NULL);
-		usleep(1000);
+		while (delegate_get_full_philos(this) != this->philo_count)
+			usleep(10000);
+		delegate_finish_simulation(this, NULL);
 	}
 	delegate_stop_simulation(this);
 }
@@ -30,6 +20,7 @@ void	delegate_start_simulation(struct s_delegate *this)
 	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&this->simulation_state_mutex);
 	while (i < this->philo_count)
 	{
 		if (pthread_create(
@@ -45,8 +36,9 @@ void	delegate_start_simulation(struct s_delegate *this)
 		}
 		i++;
 	}
+	this->simulation_started = true;
 	gettimeofday((struct timeval *) &this->start_time, NULL);
-	delegate_set_simulation_started(this, true);
+	pthread_mutex_unlock(&this->simulation_state_mutex);
 	delegate_async_check(this);
 }
 
@@ -54,13 +46,11 @@ void	delegate_finish_simulation(
 			struct s_delegate *this,
 			struct s_philo *reason)
 {
-	pthread_mutex_lock(&this->simulation_state_mutex);
+	pthread_mutex_lock(&this->print_mutex);
+	bool was = this->simulation_running;
 	this->simulation_running = false;
-	pthread_mutex_unlock(&this->simulation_state_mutex);
-	pthread_mutex_lock(&this->print_available_mutex);
-	this->print_available = false;
-	pthread_mutex_unlock(&this->print_available_mutex);
-	if (reason != NULL)
+	pthread_mutex_unlock(&this->print_mutex);
+	if (reason != NULL && was)
 		printf("%d %zu has died\n", delegate_get_time_stamp(this),
 			reason->index);
 }

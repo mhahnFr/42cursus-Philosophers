@@ -10,30 +10,22 @@ enum e_state	philo_do_or_die(
 {
 	if (action == SLEEPING)
 	{
-		delegate_print(this->delegate, this->index, " is sleeping");
+		if (!delegate_print(this->delegate, this->index, " is sleeping"))
+			return (STOPPED);
 		action = philo_sleep_or_die(this, this->delegate->time_to_sleep);
 	}
 	else if (action == EATING)
 	{
-		delegate_print(this->delegate, this->index, " is thinking");
+		if (!delegate_print(this->delegate, this->index, " is thinking"))
+			return (STOPPED);
 		action = philo_eat(this, this->delegate->time_to_eat);
 	}
 	return (action);
 }
 
-static bool	philo_await_start(struct s_philo *this)
-{
-	while (delegate_simulation_ongoing(this->delegate)
-		&& !delegate_simulation_started(this->delegate))
-		usleep(50);
-	if (!delegate_simulation_ongoing(this->delegate))
-		return (false);
-	return (true);
-}
-
 void	philo_run(struct s_philo *this)
 {
-	if (!philo_await_start(this))
+	if (!delegate_simulation_ongoing(this->delegate))
 		return ;
 	this->last_eat_time = this->delegate->start_time.tv_sec * 1000
 		+ this->delegate->start_time.tv_usec / 1000;

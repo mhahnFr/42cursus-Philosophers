@@ -24,14 +24,12 @@ struct s_delegate {
 	volatile bool			meal_count_set;
 	volatile struct timeval	start_time;
 	pthread_mutex_t			print_mutex;
-	pthread_mutex_t			print_available_mutex;
 	pthread_mutex_t			simulation_state_mutex;
 	pthread_mutex_t			full_philos_mutex;
 	int						philo_count;
 	int						full_philos;
 	bool					simulation_running;
 	bool					simulation_started;
-	bool					print_available;
 	struct s_philo			philosophers[];
 };
 
@@ -64,11 +62,6 @@ bool				delegate_validate(struct s_delegate *this);
 void				delegate_invalidate(struct s_delegate *this);
 
 /*
- * Returns wether the simulation has started.
- */
-bool				delegate_simulation_started(struct s_delegate *this);
-
-/*
  * Starts the philosophers simulation. For each philosopher, a thread is
  * run.
  */
@@ -79,13 +72,6 @@ void				delegate_start_simulation(struct s_delegate *this);
  * still running.
  */
 void				delegate_stop_simulation(struct s_delegate *this);
-
-/*
- * Marks the simulation with the given flag.
- */
-void				delegate_mark_simulation(
-						struct s_delegate *this,
-						bool running);
 
 /*
  * Safely increases the number of full philos by one.
@@ -118,7 +104,7 @@ int					delegate_get_time_diff(
  * Prints the given string on the standard output. Additionally, the current
  * timestamp and the index of the philosopher are printed.
  */
-void				delegate_print(
+bool				delegate_print(
 						struct s_delegate *this,
 						size_t philo_index,
 						char *what);
@@ -129,11 +115,6 @@ void				delegate_print(
 void				delegate_finish_simulation(
 						struct s_delegate *this,
 						struct s_philo *reason);
-
-/*
- * Returns wether a thread may print something on the standard output.
- */
-bool				delegate_get_print_available(struct s_delegate *this);
 
 /*
  * Destroys the given delegate object. Does nothing if no object is given.
