@@ -54,7 +54,7 @@ void	delegate_finish_simulation(
 	pthread_mutex_unlock(&this->print_mutex);
 	if (reason != NULL && was)
 		printf("%d %zu has died\n", delegate_get_time_stamp(this),
-			reason->index);
+			reason->index + 1);
 }
 
 void	delegate_stop_simulation(struct s_delegate *this)
