@@ -22,7 +22,7 @@ struct s_delegate {
 	volatile int			time_to_die;
 	volatile int			meal_count;
 	volatile bool			meal_count_set;
-	volatile struct timeval	start_time;
+	const struct timeval	start_time;
 	pthread_mutex_t			print_mutex;
 	pthread_mutex_t			simulation_state_mutex;
 	pthread_mutex_t			full_philos_mutex;
