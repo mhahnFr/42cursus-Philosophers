@@ -29,14 +29,17 @@ Upon termination of all philosopher threads, the application exites.
 Launch the executable with 4 or 5 arguments: ``./philo 8 410 200 200 5``.
 
 The arguments are described as follows:
-- ``count``: The number of philosophers to be simulated.
-- ``time_to_die``: The time after which a philosopher dies, if he was not able
-to eat in the meantime.
-- ``time_to_eat``: The time each philosopher needs to eat.
-- ``time_to_sleep``: The time each philosopher is sleeping after his meal.
-- ``meal_count``: The number of times each philosopher has to eat. Once all
-philosophers have eaten that amount of times, the simulation stops. If this
+- ``8`` (``count``): The number of philosophers to be simulated.
+- ``410`` (``time_to_die``): The time after which a philosopher dies, if he was
+not able to eat in the meantime.
+- ``200`` (``time_to_eat``): The time each philosopher needs to eat.
+- ``200`` (``time_to_sleep``): The time each philosopher is sleeping after his
+meal.
+- ``5`` (``meal_count``): The number of times each philosopher has to eat. Once
+all philosophers have eaten that amount of times, the simulation stops. If this
 argument is not set, the simulaion will stop upon the death of a philosopher.
+
+All times are treated as milliseconds.
 
 ### Final notes
 This repository contains the solutions I submitted in the [42 school]. It will
