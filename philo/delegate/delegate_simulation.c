@@ -31,6 +31,7 @@ void	delegate_start_simulation(struct s_delegate *this)
 		{
 			printf("Could not create thread for philosopher %d!\n", i);
 			delegate_finish_simulation(this, NULL);
+			pthread_mutex_unlock(&this->simulation_state_mutex);
 			delegate_stop_simulation(this);
 			return ;
 		}
