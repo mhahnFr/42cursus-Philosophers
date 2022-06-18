@@ -45,7 +45,14 @@ All times are treated as milliseconds.
 This repository contains the solutions I submitted in the [42 school]. It will
 not be developed further.
 
+> As all other C projects at the [42 school], the code has to written in accordance
+> with the [norm]:
+> - Only 25 lines per function,
+> - only 5 functions per file,
+> - usage of only the allowed external functions.
+
 © Copyright 2022 [mhahnFr](https://www.github.com/mhahnFr)
 
 [Dining philosophers problem]: https://en.wikipedia.org/wiki/Dining_philosophers_problem
 [42 school]: https://www.42heilbronn.de/learncoderepeat
+[norm]: https://www.github.com/42School/norminette
